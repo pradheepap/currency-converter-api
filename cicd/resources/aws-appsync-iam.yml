@@ -27,7 +27,7 @@ Resources:
                     - "logs:CreateLogStream"
                     - "logs:PutLogEvents"
                   Resource:
-                    - "arn:aws:lambda:${self:provider.region}:${self:custom.accountId}:*"
+                    - "arn:aws:lambda:${self:provider.region}:${self:custom.ACCOUNT_ID}:*"
                 - 
                   Effect: "Allow"
                   Action:
@@ -36,7 +36,7 @@ Resources:
                     - "dynamodb:PutItem"
                     - "dynamodb:Query"
                   Resource:
-                    - "arn:aws:dynamodb:${self:provider.region}:${self:custom.accountId}:*"
+                    - "arn:aws:dynamodb:${self:provider.region}:${self:custom.ACCOUNT_ID}:*"
 
     AppSyncLogRole:
       Type: AWS::IAM::Role
@@ -63,4 +63,4 @@ Resources:
                   Action:
                     - "logs:*"
                   Resource:
-                    - "arn:aws:logs:${self:provider.region}:${self:custom.accountId}:*"
+                    - "arn:aws:logs:${self:provider.region}:${self:custom.ACCOUNT_ID}:*"

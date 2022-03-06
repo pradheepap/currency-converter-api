@@ -1,11 +1,10 @@
 type Query {
-    convertCurrency(from: String, to: String, amount:Float   : [Currency]
-        @aws_api_key
+  convertCurrency(from: String, to: String, amount:Float) : Currency
 }
 
 type Currency{
     from: String
-    to: Int
+    to: String
     amount: Float
     output: Float
 }

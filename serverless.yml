@@ -29,6 +29,9 @@ provider:
   stage: prod
   region: ap-southeast-1
 
+plugins:
+   - serverless-appsync-plugin
+
 # you can add statements to the Lambda function's IAM Role here
 #  iam:
 #    role:
@@ -64,6 +67,7 @@ custom: ${file(cicd/custom-config.yml)}
 
 functions:
   convertCurrency:
+    name: convertCurrency
     handler: src/handler.convertCurrency
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
@@ -106,7 +110,9 @@ functions:
 #      variable2: value2
 
 # you can add CloudFormation resource templates here
-#resources:
+resources:
+  - ${file(cicd/resources/aws-appsync-iam.yml)}
+
 #  Resources:
 #    NewResource:
 #      Type: AWS::S3::Bucket
