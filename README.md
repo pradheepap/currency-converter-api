@@ -19,3 +19,10 @@ Any upgrade has to be catered based on this version
 Framework Core: 3.7.1
 Plugin: 6.1.5
 SDK: 4.3.2
+
+### Features
+- getCurrencyConverter
+
+### TO DO
+- Configure DynamoDB DS to update data
+- Configure Elastic Search to get Analytics
