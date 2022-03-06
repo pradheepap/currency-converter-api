@@ -1,12 +1,15 @@
 
-module.exports.hello = async (event) => ({
-  statusCode: 200,
-  body: JSON.stringify(
-    {
-      message: 'Go Serverless v1.0! Your function executed successfully!',
-      input: event,
-    },
-    null,
-    2,
-  ),
-});
+module.exports.convertCurrency = async (event, context) => {
+
+    console.log(`convertCurrency Request - ${JSON.stringify(event)}`);
+  console.log(`convertCurrency Context - ${JSON.stringify(context)}`);
+  
+  return {
+    
+    
+      from: 'USD',
+      to: 'EUR',
+      amount: 1.5,
+      output: 3.4566
+    
+}}

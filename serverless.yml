@@ -19,6 +19,8 @@ service: currency-converter-api
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
 frameworkVersion: '3'
+useDotenv: true
+
 
 provider:
   name: aws
@@ -57,9 +59,12 @@ provider:
 #    - include-me.js
 #    - include-me-dir/**
 
+custom: ${file(cicd/custom-config.yml)}
+
+
 functions:
-  hello:
-    handler: src/handler.hello
+  convertCurrency:
+    handler: src/handler.convertCurrency
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details

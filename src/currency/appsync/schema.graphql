@@ -1,0 +1,15 @@
+type Query {
+    convertCurrency(from: String, to: String, amount:Float   : [Currency]
+        @aws_api_key
+}
+
+type Currency{
+    from: String
+    to: Int
+    amount: Float
+    output: Float
+}
+
+schema {
+	query: Query
+}

@@ -1,0 +1,32 @@
+ACCOUNT_ID: ${env:accountId}
+
+appSync:
+  name: Currency Converter
+  authenticationType: AWS_IAM
+  serviceRole: AppSyncServiceRole
+  schema: src/currency/appsync/schema.graphql
+  mappingTemplatesLocation: src/currency/appsync/mapping-templates
+  mappingTemplates:
+    - dataSource: CurrencyConverter
+      type: Query
+      field: convertCurrency
+      request: "convertCurrency-request-mapping-template.txt"
+      response: "convertCurrency-response-mapping-template.txt"
+  additionalAuthenticationProviders:
+    - authenticationType: API_KEY
+    # - authenticationType: AMAZON_COGNITO_USER_POOLS
+    #   userPoolConfig:
+    #     awsRegion: ${self:provider.region}
+    #     userPoolId: ${self:custom.cognitoUserPoolId}
+  logConfig:
+    loggingRoleArn: { Fn::GetAtt: [AppSyncLogRole, Arn] }
+    level: ERROR # Logging Level: NONE | ERROR | ALL
+    excludeVerboseContent: true
+  dataSources:
+    - type: AWS_LAMBDA
+      name: CurrencyConverter
+      description: 'Currency Converter DataSource'
+      config:
+        functionName: convertCurrency
+        serviceRoleArn:  { Fn::GetAtt: [AppSyncServiceRole, Arn] }       
+        #"arn:aws:iam::${self:custom.accountId}:role/Lambda-${self:custom.appSync.serviceRole}-${self:provider.stage}"
