@@ -2,7 +2,7 @@ ACCOUNT_ID: ${env:ACCOUNT_ID}
 
 appSync:
   name: Currency Converter
-  authenticationType: AWS_IAM
+  authenticationType: API_KEY
   serviceRole: AppSyncServiceRole
   schema: src/currency/appsync/schema.graphql
   mappingTemplatesLocation: src/currency/appsync/mapping-templates
@@ -18,7 +18,7 @@ appSync:
       request: "listCurrencies-request-mapping-template.txt"
       response: "listCurrencies-response-mapping-template.txt"
   additionalAuthenticationProviders:
-    - authenticationType: API_KEY
+    - authenticationType: AWS_IAM
   logConfig:
     loggingRoleArn: { Fn::GetAtt: [AppSyncLogRole, Arn] }
     level: ERROR # Logging Level: NONE | ERROR | ALL

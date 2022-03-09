@@ -22,24 +22,23 @@ module.exports.handleConvertCurrency = async (event, context) => {
   console.log(`units : ${units}`);
 
 
-
-// //   const from = 'USD';
-//   const to = 'INR';
-//   const units = 20;
+  // //   const from = 'USD';
+  //   const to = 'INR';
+  //   const units = 20;
 
   const convertCurrencyRatesReponse = await util.getConvertRates();
 
- // console.log(`${JSON.stringify(convertCurrencyRatesReponse)}`);
+  // console.log(`${JSON.stringify(convertCurrencyRatesReponse)}`);
 
   const rate = convertCurrencyRatesReponse.rates[to];
   const convertedUnits = rate * units;
 
- // console.log(`rate, convertedRate : ${rate} / ${convertedUnits}`);
+  // console.log(`rate, convertedRate : ${rate} / ${convertedUnits}`);
 
 
   // const rate = currencyConvertResponse[to];
   // setOutput(input * rate);
-  let response= {
+  const response = {
     from,
     to,
     amount: units,
