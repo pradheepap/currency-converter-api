@@ -1,16 +1,19 @@
 const util = require('./utils/utilities');
 
 
-module.exports.handleListCurrencies = async (event) => {
-  console.log(`${JSON.stringify(event)}`);
-  const currencyListReponse = await util.getCurrencyList();
-  console.log(`${JSON.stringify(currencyListReponse)}`);
-  return currencyListReponse;
+module.exports.handleListCurrencies = async (event, context) => {
+    console.log(`Event : ${JSON.stringify(event)}`);
+    console.log(`Context : ${JSON.stringify(context)}`);
+
+    const currencyListReponse = await util.getCurrencyList();
+    console.log(`${JSON.stringify(currencyListReponse)}`);
+    return currencyListReponse;
 };
 
 
-module.exports.handleConvertCurrency = async (event) => {
-  console.log(`${JSON.stringify(event)}`);
+module.exports.handleConvertCurrency = async (event, context) => {
+  console.log(`Event : ${JSON.stringify(event)}`);
+  console.log(`Context : ${JSON.stringify(context)}`);
 
   const from = 'USD';
   const to = 'INR';
