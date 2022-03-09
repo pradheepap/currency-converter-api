@@ -12,12 +12,13 @@ appSync:
       field: convertCurrency
       request: "convertCurrency-request-mapping-template.txt"
       response: "convertCurrency-response-mapping-template.txt"
+    - dataSource: ListCurrencies
+      type: Query
+      field: listCurrencies
+      request: "listCurrencies-request-mapping-template.txt"
+      response: "listCurrencies-response-mapping-template.txt"
   additionalAuthenticationProviders:
     - authenticationType: API_KEY
-    # - authenticationType: AMAZON_COGNITO_USER_POOLS
-    #   userPoolConfig:
-    #     awsRegion: ${self:provider.region}
-    #     userPoolId: ${self:custom.cognitoUserPoolId}
   logConfig:
     loggingRoleArn: { Fn::GetAtt: [AppSyncLogRole, Arn] }
     level: ERROR # Logging Level: NONE | ERROR | ALL
@@ -28,5 +29,10 @@ appSync:
       description: 'Currency Converter DataSource'
       config:
         functionName: convertCurrency
-        serviceRoleArn:  { Fn::GetAtt: [AppSyncServiceRole, Arn] }       
-        #"arn:aws:iam::${self:custom.accountId}:role/Lambda-${self:custom.appSync.serviceRole}-${self:provider.stage}"
+        serviceRoleArn:  { Fn::GetAtt: [AppSyncServiceRole, Arn] } 
+    - type: AWS_LAMBDA
+      name: ListCurrencies
+      description: 'List Currencies DataSource'
+      config:
+        functionName: listCurrencies
+        serviceRoleArn:  { Fn::GetAtt: [AppSyncServiceRole, Arn] }         

@@ -1,5 +1,6 @@
 type Query {
-  convertCurrency(from: String, to: String, amount:Float) : Currency
+  convertCurrency(from: String, to: String, amount:Int) : Currency
+  listCurrencies : AWSJSON
 }
 
 type Currency{

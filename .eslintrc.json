@@ -1,7 +1,13 @@
 {
-    "parser": "@typescript-eslint/parser",
+    "extends": [
+        "airbnb-base"
+    ],
     "rules": {
-      "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/explicit-module-boundary-types": "off"
+        "no-console": "off",
+        "max-len": "off"
+    },
+    "env": {
+        "mocha": true,
+        "node": true
     }
-  }
+}
