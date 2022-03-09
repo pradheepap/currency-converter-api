@@ -14,6 +14,9 @@ Environment variables are maintained in .env
 
 SLS_DEBUG=*
 
+### Serverless Local Invocation
+sls invoke local -f convertCurrency
+
 ### Serverless Versions
 Any upgrade has to be catered based on this version
 Framework Core: 3.7.1
@@ -22,6 +25,12 @@ SDK: 4.3.2
 
 ### Features
 - getCurrencyConverter
+- getCurrenciesList
+
+### Exchange Currency
+https://openexchangerates.org/
+- No convert api directly available.
+- Using basic plan to convert only USD as base currency units to other currencies. 
 
 ### TO DO
 - Configure DynamoDB DS to update data

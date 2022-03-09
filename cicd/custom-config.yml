@@ -1,4 +1,4 @@
-ACCOUNT_ID: ${env:accountId}
+ACCOUNT_ID: ${env:ACCOUNT_ID}
 
 appSync:
   name: Currency Converter

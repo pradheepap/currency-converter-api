@@ -28,6 +28,9 @@ provider:
   profile: opensource
   stage: prod
   region: ap-southeast-1
+  environment:
+    API_HOME: ${env:CURRENCY_EXCHANGE_API_BASE}
+    APP_ID: ${env:APP_ID}
 
 plugins:
    - serverless-appsync-plugin
@@ -51,8 +54,7 @@ plugins:
 #                - "/*"
 
 # you can define service wide environment variables here
-#  environment:
-#    variable1: value1
+
 
 # you can add packaging information here
 #package:
@@ -66,9 +68,12 @@ custom: ${file(cicd/custom-config.yml)}
 
 
 functions:
+  listCurrencies:
+    name: listCurrencies
+    handler: src/currency-converter/handler.handleListCurrencies
   convertCurrency:
     name: convertCurrency
-    handler: src/handler.convertCurrency
+    handler: src/currency-converter/handler.handleConvertCurrency
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
