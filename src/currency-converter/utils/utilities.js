@@ -50,7 +50,7 @@ module.exports.getCurrencyList = async () => {
   return currencyExchangeResponse;
 };
 
-module.exports.convertCurrency = async () => {
+module.exports.getConvertRates = async () => {
   let currencyConvertResponse = null;
   let currencyConvertJsonResponse = null;
   const LATEST_PATH = 'latest.json';
