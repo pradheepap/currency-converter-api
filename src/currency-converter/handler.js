@@ -1,9 +1,14 @@
+/* eslint no-restricted-globals:0 */
+
+const uuid = require('uuid');
 const util = require('./utils/utilities');
 const dynamoDbService = require('./utils/dynamodbUtils');
-const uuid = require("uuid");
+
 const Constants = {
-  "ANALYTICS_SK" : "ANALYTICS" 
-}
+  CURRENCY_VALUE_USD_PK: 'CURRENCY_VALUE_IN_USD',
+  ANALYTICS_SK: 'ANALYTICS',
+  TOTAL_ITEMS_PK: 'TOTAL_ITEMS'
+};
 
 
 module.exports.handleListCurrencies = async (event, context) => {
@@ -37,50 +42,57 @@ module.exports.handleConvertCurrency = async (event, context) => {
 
 
   const CurrencyItem = {
-    "PK": id,
-    "SK" : `${from}-${to}`,
-    "SOURCE": from,
-    "DESTINATION": to
-  }
+    PK: id,
+    SK: `${from}-${to}`,
+    SOURCE: from,
+    DESTINATION: to,
+  };
 
   await dynamoDbService.createItem(CurrencyItem);
 
   /** Get & Update Analytics Information */
-  const CURRENCY_TX_COUNT_PK = "TOTAL_ITEMS"; 
-  const countResponse =  await dynamoDbService.queryCurrencyTxAnalyticsCount(CURRENCY_TX_COUNT_PK);
+  const countResponse = await dynamoDbService.queryCurrencyTxAnalyticsCount(Constants.TOTAL_ITEMS_PK);
   console.log(`countInt : ${JSON.stringify(countResponse)}`);
   let countInt;
-  if(countResponse){
-    countInt = parseInt(countResponse.VALUE);
-  }
 
-  console.log(`countInt : ${countInt}`);
+  if (countResponse) {
+    // Update Existing Item
+    countInt = (countResponse.VALUE, 10);
+    countInt += 1;
+    await dynamoDbService.UpdateCurrencyAnalytics(Constants.TOTAL_ITEMS_PK, Constants.ANALYTICS_SK, countInt);
 
-  if(isNaN(countInt)) {
-    countInt = 1;
+  }else{
     // Create new item
     const CurrencyAnalyticsItem = {
-      "PK": CURRENCY_TX_COUNT_PK,
-      "SK": Constants.ANALYTICS_SK,
-      "VALUE" :  String(countInt++),
-    }
+      PK: Constants.TOTAL_ITEMS_PK,
+      SK: Constants.ANALYTICS_SK,
+      VALUE: 1,
+    };
     await dynamoDbService.createItem(CurrencyAnalyticsItem);
-  }else{
-    // const CurrencyAnalyticsItem = {
-    //   "PK": CURRENCY_TX_COUNT_PK,
-    //   "SK": "ANALYTICS",
-    // }
-    countInt++;
-    const count = String(countInt);
-    await dynamoDbService.UpdateCurrencyAnalytics(CURRENCY_TX_COUNT_PK, Constants.ANALYTICS_SK, count);
+
   }
-  
-  
 
+  // const CURRENCY_VALUE_USD_PK = Constants.CURRENCY_VALUE_USD_PK;
+  const currencyValueInUSDResponse =  await dynamoDbService.queryCurrencyTxAnalyticsCount(Constants.CURRENCY_VALUE_USD_PK);
+  console.log(`currencyValueInUSDResponse : ${JSON.stringify(currencyValueInUSDResponse)}`);
+  let currencyValueInUSD;
+  if (currencyValueInUSDResponse) {
+    // Update TotalCurrencyValueinUSD
+    currencyValueInUSD = currencyValueInUSDResponse.VALUE;
+    currencyValueInUSD += units; // Source is always USD for now
+    console.log('currencyValueInUSD is', currencyValueInUSD)
+    await dynamoDbService.UpdateCurrencyAnalytics(Constants.CURRENCY_VALUE_USD_PK, Constants.ANALYTICS_SK, currencyValueInUSD);
+  }else{
+    // Create new  USD item
+    const CurrencyAnalyticsItem = {
+      PK: Constants.CURRENCY_VALUE_USD_PK,
+      SK: Constants.ANALYTICS_SK,
+      VALUE: units,
+    };
+    await dynamoDbService.createItem(CurrencyAnalyticsItem);
 
-  // const CURRENCY_VALUE_USD_PK = "TOTAL_VALUE_IN_USD"; 
-  // const currencyValueInUSD =  dynamoDbService.queryCurrencyTxAnalyticsCount("CURRENCY_TX_COUNT_PK");
-  // let CurrencyValueInUSDitem;
+  }
+
   // const CurrencyValueInUSD = {
   //   "PK" : CURRENCY_TX_COUNT_PK
   // }

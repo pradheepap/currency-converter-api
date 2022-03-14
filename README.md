@@ -15,10 +15,10 @@ Environment variables are maintained in .env
 SLS_DEBUG=*
 
 ### Serverless Local Invocation
-sls invoke local -f convertCurrency --data '{\"source\":\"USD\",\"destination\":\"INR\",\"units\":20}'
+sls invoke local -f convertCurrency --data '{\"event\": {\"source\":\"USD\",\"destination\":\"INR\",\"units\":20}}'
 
 ### Serverless Invoke Function
-sls invoke  -f convertCurrency --data '{\"source\":\"USD\",\"destination\":\"INR\",\"units\":20}'
+sls invoke  -f convertCurrency --data '{\"event\": {\"source\":\"USD\",\"destination\":\"INR\",\"units\":20}}'
 
 ### Serverless Versions
 Any upgrade has to be catered based on this version

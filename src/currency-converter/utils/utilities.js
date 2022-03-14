@@ -1,7 +1,5 @@
 const fetch = require('node-fetch');
 const { ApiError } = require('./error');
-const dynamoDb = require("./dynamodbUtils");
-
 
 const CURRENCY_EXCHANGE_API_HOME = process.env.API_HOME;
 const { APP_ID } = process.env;
