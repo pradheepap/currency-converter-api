@@ -18,13 +18,8 @@ module.exports.handleConvertCurrency = async (event, context) => {
 
   console.log(`from : ${from}`);
   console.log(`to : ${to}`);
-
   console.log(`units : ${units}`);
 
-
-  // //   const from = 'USD';
-  //   const to = 'INR';
-  //   const units = 20;
 
   const convertCurrencyRatesReponse = await util.getConvertRates();
 

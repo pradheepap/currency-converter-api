@@ -5,7 +5,7 @@ const CURRENCY_EXCHANGE_API_HOME = process.env.API_HOME;
 const { APP_ID } = process.env;
 
 module.exports.getCurrencyList = async () => {
-  const CURRENCIES_PATH = 'currencies.json';
+  const CURRENCIES_PATH = 'latest.json';
 
 
   let currencyExchangeResponse = null;
