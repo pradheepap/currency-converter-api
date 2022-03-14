@@ -1,5 +1,5 @@
 Resources: 
-  CURRENCY_TRANSACTIONS_TABLE:
+  CurrencyTransactionsTable:
     Type: AWS::DynamoDB::Table
     Properties:
       TableName: CURRENCY_TRANSACTIONS

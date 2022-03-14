@@ -31,27 +31,21 @@ provider:
   environment:
     API_HOME: ${env:CURRENCY_EXCHANGE_API_BASE}
     APP_ID: ${env:APP_ID}
+    CURRENCY_TRANSACTIONS: 'CURRENCY_TRANSACTIONS'
 
-plugins:
-   - serverless-appsync-plugin
-
-# you can add statements to the Lambda function's IAM Role here
-#  iam:
-#    role:
-#      statements:
-#        - Effect: "Allow"
-#          Action:
-#            - "s3:ListBucket"
-#          Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
-#        - Effect: "Allow"
-#          Action:
-#            - "s3:PutObject"
-#          Resource:
-#            Fn::Join:
-#              - ""
-#              - - "arn:aws:s3:::"
-#                - "Ref" : "ServerlessDeploymentBucket"
-#                - "/*"
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - lambda:InvokeFunction
+            - lambda:InvokeAsync
+          Resource: "*"
+        - Effect: "Allow"
+          Action:
+            - "dynamodb:*"
+          Resource:
+            - arn:aws:dynamodb:${self:provider.region}:${self:custom.ACCOUNT_ID}:table/${self:provider.environment.CURRENCY_TRANSACTIONS}
 
 # you can define service wide environment variables here
 
@@ -63,6 +57,9 @@ plugins:
 #    - '!exclude-me-dir/**'
 #    - include-me.js
 #    - include-me-dir/**
+
+plugins:
+   - serverless-appsync-plugin
 
 custom: ${file(cicd/custom-config.yml)}
 
