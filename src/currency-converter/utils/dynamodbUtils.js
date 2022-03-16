@@ -85,10 +85,24 @@ module.exports.createItem = async (item) => {
 };
 
 module.exports.queryCurrencyTxAnalytics = async (pk, sk) => {
+  // const params = {
+  //   KeyConditionExpression: "PK = :pk, SK = :sk",
+  //   ExpressionAttributeValues: {
+  //     PK: pk,
+  //     SK: sk,
+  //   },
+  //   TableName: CURRENCY_TRANSACTIONS_TABLE,
+  //   ConsistentRead: true,
+  // };
   const params = {
-    Key: {
-      PK: pk,
-      SK: sk,
+    KeyConditionExpression: '#PK = :pk and #SK = :sk',
+    ExpressionAttributeNames: {
+      '#PK': 'PK',
+      '#SK': 'SK',
+    },
+    ExpressionAttributeValues: {
+      ':pk': pk,
+      ':sk': sk,
     },
     TableName: CURRENCY_TRANSACTIONS_TABLE,
     ConsistentRead: true,

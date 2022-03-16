@@ -57,7 +57,7 @@ module.exports.handleConvertCurrency = async (event, context) => {
 
   if (countResponse) {
     // Update Existing Item
-    countInt = (countResponse.VALUE, 10);
+    countInt = (countResponse.VALUE);
     countInt += 1;
     await dynamoDbService.UpdateCurrencyAnalytics(Constants.TOTAL_ITEMS_PK, Constants.ANALYTICS_SK, countInt);
   } else {
