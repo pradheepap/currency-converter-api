@@ -51,7 +51,7 @@ module.exports.handleConvertCurrency = async (event, context) => {
   await dynamoDbService.createItem(CurrencyItem);
 
   /** Get & Update Analytics Information */
-  const countResponse = await dynamoDbService.queryCurrencyTxAnalyticsCount(Constants.TOTAL_ITEMS_PK);
+  const countResponse = await dynamoDbService.queryCurrencyTxAnalytics(Constants.TOTAL_ITEMS_PK, Constants.ANALYTICS_SK);
   console.log(`countInt : ${JSON.stringify(countResponse)}`);
   let countInt;
 
@@ -71,7 +71,7 @@ module.exports.handleConvertCurrency = async (event, context) => {
   }
 
   // const CURRENCY_VALUE_USD_PK = Constants.CURRENCY_VALUE_USD_PK;
-  const currencyValueInUSDResponse = await dynamoDbService.queryCurrencyTxAnalyticsCount(Constants.CURRENCY_VALUE_USD_PK, Constants.ANALYTICS_SK);
+  const currencyValueInUSDResponse = await dynamoDbService.queryCurrencyTxAnalytics(Constants.CURRENCY_VALUE_USD_PK, Constants.ANALYTICS_SK);
   console.log(`currencyValueInUSDResponse : ${JSON.stringify(currencyValueInUSDResponse)}`);
   let currencyValueInUSD;
   if (currencyValueInUSDResponse) {

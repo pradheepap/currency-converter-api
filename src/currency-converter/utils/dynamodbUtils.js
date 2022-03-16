@@ -84,7 +84,7 @@ module.exports.createItem = async (item) => {
   return persistToDB(params);
 };
 
-module.exports.queryCurrencyTxAnalyticsCount = async (pk, sk) => {
+module.exports.queryCurrencyTxAnalytics = async (pk, sk) => {
   const params = {
     Key: {
       PK: pk,
@@ -93,9 +93,9 @@ module.exports.queryCurrencyTxAnalyticsCount = async (pk, sk) => {
     TableName: CURRENCY_TRANSACTIONS_TABLE,
     ConsistentRead: true,
   };
-  console.log(`queryCurrencyTxAnalyticsCount - params  - ${JSON.stringify(params)}`);
+  console.log(`queryCurrencyTxAnalytics - params  - ${JSON.stringify(params)}`);
   const response = await queryItem(params);
-  console.log(`queryCurrencyTxAnalyticsCount - response  - ${JSON.stringify(response)}`);
+  console.log(`queryCurrencyTxAnalytics - response  - ${JSON.stringify(response)}`);
   const item = response.Items ? response.Items[0] : null;
   return item;
 };
