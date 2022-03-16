@@ -86,10 +86,6 @@ module.exports.createItem = async (item) => {
 
 module.exports.queryCurrencyTxAnalyticsCount = async (pk, sk) => {
   const params = {
-    ExpressionAttributeValues: {
-      ':pk': pk,
-      ':sk': sk,
-    },
     Key: {
       PK: ':pk',
       SK: ':sk',
