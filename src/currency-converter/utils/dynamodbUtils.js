@@ -87,8 +87,8 @@ module.exports.createItem = async (item) => {
 module.exports.queryCurrencyTxAnalyticsCount = async (pk, sk) => {
   const params = {
     Key: {
-      PK: ':pk',
-      SK: ':sk',
+      PK: pk,
+      SK: sk,
     },
     TableName: CURRENCY_TRANSACTIONS_TABLE,
     ConsistentRead: true,
