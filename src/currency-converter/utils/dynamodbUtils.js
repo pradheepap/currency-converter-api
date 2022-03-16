@@ -88,11 +88,11 @@ module.exports.queryCurrencyTxAnalyticsCount = async (pk, sk) => {
   const params = {
     ExpressionAttributeValues: {
       ':pk': pk,
-      ':sk': sk
+      ':sk': sk,
     },
     Key: {
-        'PK' : ':pk',
-        'SK' : ':sk'
+      PK: ':pk',
+      SK: ':sk',
     },
     TableName: CURRENCY_TRANSACTIONS_TABLE,
     ConsistentRead: true,

@@ -7,7 +7,7 @@ const dynamoDbService = require('./utils/dynamodbUtils');
 const Constants = {
   CURRENCY_VALUE_USD_PK: 'CURRENCY_VALUE_IN_USD',
   ANALYTICS_SK: 'ANALYTICS',
-  TOTAL_ITEMS_PK: 'TOTAL_ITEMS'
+  TOTAL_ITEMS_PK: 'TOTAL_ITEMS',
 };
 
 
@@ -60,8 +60,7 @@ module.exports.handleConvertCurrency = async (event, context) => {
     countInt = (countResponse.VALUE, 10);
     countInt += 1;
     await dynamoDbService.UpdateCurrencyAnalytics(Constants.TOTAL_ITEMS_PK, Constants.ANALYTICS_SK, countInt);
-
-  }else{
+  } else {
     // Create new item
     const CurrencyAnalyticsItem = {
       PK: Constants.TOTAL_ITEMS_PK,
@@ -69,20 +68,19 @@ module.exports.handleConvertCurrency = async (event, context) => {
       VALUE: 1,
     };
     await dynamoDbService.createItem(CurrencyAnalyticsItem);
-
   }
 
   // const CURRENCY_VALUE_USD_PK = Constants.CURRENCY_VALUE_USD_PK;
-  const currencyValueInUSDResponse =  await dynamoDbService.queryCurrencyTxAnalyticsCount(Constants.CURRENCY_VALUE_USD_PK);
+  const currencyValueInUSDResponse = await dynamoDbService.queryCurrencyTxAnalyticsCount(Constants.CURRENCY_VALUE_USD_PK, Constants.ANALYTICS_SK);
   console.log(`currencyValueInUSDResponse : ${JSON.stringify(currencyValueInUSDResponse)}`);
   let currencyValueInUSD;
   if (currencyValueInUSDResponse) {
     // Update TotalCurrencyValueinUSD
     currencyValueInUSD = currencyValueInUSDResponse.VALUE;
     currencyValueInUSD += units; // Source is always USD for now
-    console.log('currencyValueInUSD is', currencyValueInUSD)
+    console.log('currencyValueInUSD is', currencyValueInUSD);
     await dynamoDbService.UpdateCurrencyAnalytics(Constants.CURRENCY_VALUE_USD_PK, Constants.ANALYTICS_SK, currencyValueInUSD);
-  }else{
+  } else {
     // Create new  USD item
     const CurrencyAnalyticsItem = {
       PK: Constants.CURRENCY_VALUE_USD_PK,
@@ -90,7 +88,6 @@ module.exports.handleConvertCurrency = async (event, context) => {
       VALUE: units,
     };
     await dynamoDbService.createItem(CurrencyAnalyticsItem);
-
   }
 
   // const CurrencyValueInUSD = {
