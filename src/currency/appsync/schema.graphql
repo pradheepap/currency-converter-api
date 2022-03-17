@@ -8,6 +8,7 @@ type Currency{
     to: String
     amount: Float
     output: Float
+    rate: Float
 }
 
 schema {

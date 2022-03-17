@@ -110,6 +110,7 @@ module.exports.handleConvertCurrency = async (event, context) => {
   const response = {
     from,
     to,
+    rate,
     amount: units,
     output: convertedUnits,
   };
