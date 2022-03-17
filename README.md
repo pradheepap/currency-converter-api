@@ -35,9 +35,19 @@ https://openexchangerates.org/
 - No convert api directly available.
 - Using basic plan to convert only USD as base currency units to other currencies. 
 
-### 
+### GraphQL Sample Query
+query MyQuery {
+  getValueInUSD
+  getTransactionsCount
+  convertCurrency(from: "USD", to: "SGD", units: 30) {
+    amount
+    from
+    output
+    rate
+  }
+  listCurrencies
+}
 
 
-### TO DO
-- Configure DynamoDB DS to update data
+### Features Enhancement
 - Configure Elastic Search to get Analytics
