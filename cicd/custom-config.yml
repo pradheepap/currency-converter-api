@@ -17,6 +17,16 @@ appSync:
       field: listCurrencies
       request: "listCurrencies-request-mapping-template.txt"
       response: "listCurrencies-response-mapping-template.txt"
+    - dataSource: CurrencyTransactionsDynamoDB
+      type: Query
+      field: getTransactionsCount
+      request: "getTransactionsCount-request-mapping-template.txt"
+      response: "getTransactionsCount-response-mapping-template.txt"
+    - dataSource: CurrencyTransactionsDynamoDB
+      type: Query
+      field: getValueInUSD
+      request: "getValueInUSD-request-mapping-template.txt"
+      response: "getValueInUSD-response-mapping-template.txt"
   additionalAuthenticationProviders:
     - authenticationType: AWS_IAM
   logConfig:
@@ -35,4 +45,13 @@ appSync:
       description: 'List Currencies DataSource'
       config:
         functionName: listCurrencies
-        serviceRoleArn:  { Fn::GetAtt: [AppSyncServiceRole, Arn] }         
+        serviceRoleArn:  { Fn::GetAtt: [AppSyncServiceRole, Arn] }
+    - type: AMAZON_DYNAMODB
+      name: CurrencyTransactionsDynamoDB
+      description: 'Currency Transactions DataSource'
+      config:
+        tableName: {Ref: CurrencyTransactionsTable} 
+        serviceRoleArn:
+          Fn::GetAtt: [ AppSyncServiceRole, Arn ]
+    
+         

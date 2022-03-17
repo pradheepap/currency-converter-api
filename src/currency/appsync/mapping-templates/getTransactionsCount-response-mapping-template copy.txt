@@ -1,0 +1,2 @@
+ $ctx.result.items[0].VALUE
+

@@ -116,7 +116,6 @@ resources:
   - ${file(cicd/resources/aws-appsync-iam.yml)}
   - ${file(cicd/resources/aws-dynamodb.yml)}
 
-
 #  Resources:
 #    NewResource:
 #      Type: AWS::S3::Bucket
