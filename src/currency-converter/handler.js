@@ -26,28 +26,28 @@ module.exports.handleConvertCurrency = async (event, context) => {
   console.log(`Context : ${JSON.stringify(context)}`);
   console.log(`Event Headers: ${JSON.stringify(event.headers)}`);
 
-  const { from, to, units } = event;
+  const {
+    from, to, units, user,
+  } = event;
 
   const id = uuid.v1();
 
   console.log(`from : ${from}`);
   console.log(`to : ${to}`);
   console.log(`units : ${units}`);
+  console.log(`user : ${user}`);
 
 
   const convertCurrencyRatesReponse = await util.getConvertRates();
-
-  // console.log(`${JSON.stringify(convertCurrencyRatesReponse)}`);
-
   const rate = convertCurrencyRatesReponse.rates[to];
   const convertedUnits = rate * units;
-
 
   const CurrencyItem = {
     PK: id,
     SK: `${from}-${to}`,
     SOURCE: from,
     DESTINATION: to,
+    USER: user,
   };
 
   await dynamoDbService.createItem(CurrencyItem);

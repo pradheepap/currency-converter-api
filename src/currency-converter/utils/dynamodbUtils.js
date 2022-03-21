@@ -73,7 +73,7 @@ module.exports.createItem = async (item) => {
 
   const createItem = {
     ...item,
-    createdAt: now,
+    CREATED_AT: now,
   };
 
   const params = {

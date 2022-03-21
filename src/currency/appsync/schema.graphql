@@ -1,5 +1,5 @@
 type Query {
-  convertCurrency(from: String, to: String, units:Int) : Currency
+  convertCurrency(from: String, to: String, units:Int, user: String) : Currency
   listCurrencies : AWSJSON
   getTransactionsCount: Int
 	getValueInUSD: Float

@@ -39,17 +39,7 @@ https://openexchangerates.org/
 https://4im56e5pnjgpbmuqrzcxtgv2lm.appsync-api.ap-southeast-1.amazonaws.com/graphql
 
 ### GraphQL Sample Query
-query MyQuery {
-  getValueInUSD
-  getTransactionsCount
-  convertCurrency(from: "USD", to: "SGD", units: 30) {
-    amount
-    from
-    output
-    rate
-  }
-  listCurrencies
-}
+
 
 
 ### Features Enhancement
