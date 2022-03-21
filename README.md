@@ -35,6 +35,9 @@ https://openexchangerates.org/
 - No convert api directly available.
 - Using basic plan to convert only USD as base currency units to other currencies. 
 
+## AppSync Endpoint
+https://4im56e5pnjgpbmuqrzcxtgv2lm.appsync-api.ap-southeast-1.amazonaws.com/graphql
+
 ### GraphQL Sample Query
 query MyQuery {
   getValueInUSD
