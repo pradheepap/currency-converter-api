@@ -27,19 +27,37 @@ Plugin: 6.1.5
 SDK: 4.3.2
 
 ### Features
-- getCurrencyConverter
-- getCurrenciesList
+- getTransactionsCount
+- getValueInUSD
+- listCurrencies
+- convertCurrency
 
-### Exchange Currency
+### Limitations Exchange Currency
 https://openexchangerates.org/
 - No convert api directly available.
 - Using basic plan to convert only USD as base currency units to other currencies. 
+- Since base currency is always USD, the conversion is always from USD to other currencies.
 
 ## AppSync Endpoint
 https://4im56e5pnjgpbmuqrzcxtgv2lm.appsync-api.ap-southeast-1.amazonaws.com/graphql
 
 ### GraphQL Sample Query
+query MyQuery {
+  convertCurrency(from: "USD", to: "SGD", units: 30, user: "test-1234") {
+    amount
+    from
+    output
+    rate
+    to
+  }
+  getTransactionsCount
+  getValueInUSD
+  listCurrencies
+}
 
+### Features To Be Implemented
+- Get Popular Currencies.
+- Get Transaction History of the user based on username.
 
 
 ### Features Enhancement
