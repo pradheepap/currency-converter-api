@@ -22,8 +22,10 @@ module.exports.handleListCurrencies = async (event, context) => {
 
 
 module.exports.handleConvertCurrency = async (event, context) => {
-  console.log(`Event : ${JSON.stringify(event)}`);
+  console.log(`Event : ${JSON.stringify(event.arguments)}`);
   console.log(`Context : ${JSON.stringify(context)}`);
+  console.log(`Event Headers: ${JSON.stringify(event.headers)}`);
+
   const { from, to, units } = event;
 
   const id = uuid.v1();
