@@ -11,7 +11,9 @@ type Currency{
     amount: Float
     output: Float
     rate: Float
+    createdDate: String
 }
+
 
 schema {
 	query: Query
